@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Green'Fit &amp; Spa — The Caribbean Fitness Experience</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;family=Jost:wght@200;300;400;500&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sage: #5A7A4A;
+    --sage-light: #7A9E68;
+    --sage-pale: #B8D4A8;
+    --cream: #F5F0E8;
+    --cream-dark: #EDE6D6;
+    --earth: #7A6548;
+    --charcoal: #1A1A18;
+    --white: #FDFCF8;
+    --gold: #C4A97A;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; background: var(--white); color: var(--charcoal); overflow-x: hidden; cursor: none; }
+
+  /* CURSOR */
+  .cursor { width: 8px; height: 8px; background: var(--sage); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: transform 0.1s ease; }
+  .cursor-ring { width: 30px; height: 30px; border: 1px solid var(--sage-light); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: all 0.3s cubic-bezier(0.25,0.46,0.45,0.94); opacity: 0.6; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; padding: 24px 56px; display: flex; align-items: center; justify-content: space-between; transition: background 0.5s, padding 0.3s; }
+  nav.scrolled { background: rgba(253,252,248,0.96); backdrop-filter: blur(20px); padding: 16px 56px; border-bottom: 1px solid var(--cream-dark); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; letter-spacing: 0.1em; color: var(--white); text-decoration: none; transition: color 0.3s; }
+  nav.scrolled .nav-logo { color: var(--charcoal); } nav.scrolled .nav-logo small { color: var(--earth) !important; }
+  .nav-logo span { color: var(--sage-light); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-size: 10px; font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.3s; }
+  nav.scrolled .nav-links a { color: var(--earth); }
+  .nav-links a:hover { color: var(--sage-light); }
+  .nav-cta { font-size: 10px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); border: 1px solid rgba(255,255,255,0.5); padding: 9px 22px; text-decoration: none; transition: all 0.3s; }
+  nav.scrolled .nav-cta { color: var(--charcoal); border-color: var(--charcoal); }
+  .nav-cta:hover { background: var(--sage); border-color: var(--sage); color: var(--white) !important; }
+
+  /* HERO */
+  .hero { height: 100vh; min-height: 700px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(20,20,18,0.6) 0%, rgba(90,122,74,0.25) 50%, rgba(20,20,18,0.75) 100%); z-index: 1; }
+  .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; animation: heroZoom 22s ease-in-out infinite alternate; }
+  @keyframes heroZoom { from { transform: scale(1.0); } to { transform: scale(1.08); } }
+  .hero-content { position: relative; z-index: 2; text-align: center; padding: 0 20px; opacity: 0; animation: fadeUp 1.4s 0.3s cubic-bezier(0.16,1,0.3,1) forwards; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-eyebrow { font-size: 10px; font-weight: 300; letter-spacing: 0.45em; text-transform: uppercase; color: var(--sage-light); margin-bottom: 24px; animation: fadeUp 1.4s 0.4s both; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(68px, 11vw, 140px); font-weight: 300; line-height: 0.88; color: var(--white); animation: fadeUp 1.4s 0.6s both; }
+  .hero-title em { font-style: italic; color: var(--sage-pale); display: block; }
+  .hero-tagline { font-size: 12px; font-weight: 200; letter-spacing: 0.35em; color: rgba(255,255,255,0.55); margin-top: 28px; text-transform: uppercase; animation: fadeUp 1.4s 0.8s both; }
+  .hero-actions { display: flex; gap: 18px; justify-content: center; margin-top: 52px; animation: fadeUp 1.4s 1s both; }
+  .btn-primary { font-size: 10px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; text-decoration: none; background: var(--sage); color: var(--white); padding: 15px 38px; transition: all 0.4s; }
+  .btn-primary:hover { background: var(--sage-light); transform: translateY(-2px); }
+  .btn-ghost { font-size: 10px; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; text-decoration: none; border: 1px solid rgba(255,255,255,0.4); color: var(--white); padding: 15px 38px; transition: all 0.4s; }
+  .btn-ghost:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+  .hero-scroll { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; z-index: 2; animation: fadeUp 1s 1.6s both; }
+  .hero-scroll span { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+  .scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+  @keyframes scrollPulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+  /* MARQUEE */
+  .marquee-strip { background: var(--sage); padding: 13px 0; overflow: hidden; white-space: nowrap; }
+  .marquee-inner { display: inline-flex; animation: marqueeScroll 30s linear infinite; }
+  .marquee-item { font-size: 9px; font-weight: 300; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(255,255,255,0.85); padding: 0 44px; }
+  .marquee-sep { color: rgba(255,255,255,0.4); font-size: 14px; }
+  @keyframes marqueeScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* HALL INTRO */
+  .hall { display: grid; grid-template-columns: 1fr 1fr; min-height: 85vh; }
+  .hall-image { position: relative; overflow: hidden; }
+  .hall-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+  .hall-image:hover img { transform: scale(1.04); }
+  .hall-content { background: var(--cream); display: flex; flex-direction: column; justify-content: center; padding: 100px 80px; }
+  .section-label { font-size: 9px; font-weight: 400; letter-spacing: 0.42em; text-transform: uppercase; color: var(--sage); display: flex; align-items: center; gap: 16px; margin-bottom: 36px; }
+  .section-label::before { content: ''; display: block; width: 36px; height: 1px; background: var(--sage); }
+  .hall-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 4vw, 62px); font-weight: 300; line-height: 1.12; color: var(--charcoal); margin-bottom: 28px; }
+  .hall-title em { font-style: italic; color: var(--sage); }
+  .hall-text { font-size: 13px; font-weight: 300; line-height: 1.95; color: var(--earth); max-width: 420px; margin-bottom: 44px; }
+  .hall-stats { display: flex; gap: 44px; padding-top: 36px; border-top: 1px solid var(--cream-dark); }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 44px; font-weight: 300; color: var(--charcoal); line-height: 1; }
+  .stat-label { font-size: 9px; font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase; color: var(--earth); margin-top: 6px; }
+
+  /* SERVICES GRID */
+  .services-section { background: var(--charcoal); padding: 110px 56px; }
+  .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 70px; }
+  .services-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(42px, 5vw, 70px); font-weight: 300; color: var(--white); line-height: 1.05; }
+  .services-title em { font-style: italic; color: var(--sage-light); display: block; }
+  .services-desc { font-size: 12px; font-weight: 200; line-height: 1.85; color: rgba(255,255,255,0.45); max-width: 260px; }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+  .svc-card { position: relative; overflow: hidden; height: 460px; cursor: none; }
+  .svc-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; }
+  .svc-card:hover img { transform: scale(1.06); }
+  .svc-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,26,24,0.92) 0%, rgba(26,26,24,0.2) 55%, transparent 100%); transition: background 0.5s; }
+  .svc-card:hover .svc-overlay { background: linear-gradient(to top, rgba(90,122,74,0.88) 0%, rgba(26,26,24,0.35) 60%, transparent 100%); }
+  .svc-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 36px 32px; transform: translateY(16px); transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+  .svc-card:hover .svc-info { transform: translateY(0); }
+  .svc-num { font-size: 9px; letter-spacing: 0.3em; color: var(--sage-light); margin-bottom: 10px; }
+  .svc-name { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; color: var(--white); line-height: 1.2; margin-bottom: 10px; }
+  .svc-desc { font-size: 11px; font-weight: 200; line-height: 1.75; color: rgba(255,255,255,0.7); max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.4s; opacity: 0; }
+  .svc-card:hover .svc-desc { max-height: 100px; opacity: 1; }
+  .svc-arrow { display: inline-block; margin-top: 14px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage-pale); opacity: 0; transform: translateX(-10px); transition: all 0.4s 0.1s; }
+  .svc-card:hover .svc-arrow { opacity: 1; transform: translateX(0); }
+
+  /* THÉRAPEUTES */
+  .therapeutes { background: var(--cream); padding: 0; display: grid; grid-template-columns: 1fr 1fr; min-height: 70vh; }
+  .therapeutes-img { overflow: hidden; position: relative; background: #1a1a18; display: flex; align-items: center; justify-content: center; }
+  .therapeutes-img img { width: 100%; height: 100%; object-fit: contain; object-position: center center; background: var(--cream); transition: transform 0.8s; }
+  .therapeutes-img:hover img { transform: scale(1.03); }
+  .therapeutes-content { background: var(--charcoal); display: flex; flex-direction: column; justify-content: center; padding: 90px 80px; }
+  .therapeutes-content .section-label { color: var(--sage-light); }
+  .therapeutes-content .section-label::before { background: var(--sage-light); }
+  .therapeutes-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 3.5vw, 54px); font-weight: 300; color: var(--white); line-height: 1.15; margin-bottom: 24px; }
+  .therapeutes-title em { font-style: italic; color: var(--sage-light); }
+  .therapeutes-text { font-size: 13px; font-weight: 200; line-height: 1.9; color: rgba(255,255,255,0.55); margin-bottom: 44px; max-width: 400px; }
+  .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .team-item { display: flex; align-items: flex-start; gap: 14px; }
+  .team-icon { width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--sage-light); font-size: 14px; }
+  .team-name { font-size: 11px; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white); margin-bottom: 4px; }
+  .team-role { font-size: 11px; font-weight: 200; color: rgba(255,255,255,0.45); line-height: 1.5; }
+
+  /* UNIVERS SECTION (vestiaires, yoga, kids…) */
+  .univers { padding: 110px 56px; background: var(--white); }
+  .univers-header { text-align: center; margin-bottom: 72px; }
+  .univers-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(42px, 5vw, 68px); font-weight: 300; color: var(--charcoal); line-height: 1.1; margin-bottom: 16px; }
+  .univers-sub { font-size: 12px; font-weight: 200; letter-spacing: 0.2em; color: var(--earth); }
+  .univers-bento { display: grid; grid-template-columns: 1.3fr 1fr 1fr; grid-template-rows: 360px 360px; gap: 4px; }
+  .bento-item { overflow: hidden; position: relative; cursor: none; }
+  .bento-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; }
+  .bento-item:hover img { transform: scale(1.06); }
+  .bento-item.tall { grid-row: 1 / 3; }
+  .bento-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,26,24,0.82) 0%, transparent 55%); opacity: 0.7; transition: opacity 0.4s; }
+  .bento-item:hover .bento-overlay { opacity: 1; }
+  .bento-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px 28px; }
+  .bento-tag { font-size: 9px; font-weight: 400; letter-spacing: 0.35em; text-transform: uppercase; color: var(--sage-light); margin-bottom: 6px; }
+  .bento-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: var(--white); line-height: 1.2; }
+  .bento-desc { font-size: 11px; font-weight: 200; color: rgba(255,255,255,0.65); margin-top: 6px; max-height: 0; overflow: hidden; transition: max-height 0.5s, opacity 0.4s; opacity: 0; }
+  .bento-item:hover .bento-desc { max-height: 60px; opacity: 1; }
+
+  /* ROOFTOP FULL */
+  .rooftop { position: relative; height: 70vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .rooftop img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .rooftop-overlay { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(26,26,24,0.55) 0%, rgba(90,122,74,0.2) 60%, rgba(26,26,24,0.65) 100%); }
+  .rooftop-content { position: relative; z-index: 2; text-align: center; padding: 0 20px; }
+  .rooftop-tag { font-size: 10px; letter-spacing: 0.42em; text-transform: uppercase; color: var(--sage-light); margin-bottom: 20px; }
+  .rooftop-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(48px, 7vw, 96px); font-weight: 300; color: var(--white); line-height: 0.95; }
+  .rooftop-title em { font-style: italic; color: var(--sage-pale); display: block; }
+  .rooftop-sub { font-size: 12px; font-weight: 200; letter-spacing: 0.25em; color: rgba(255,255,255,0.6); margin-top: 24px; }
+
+  /* RESTAURANT */
+  .restaurant { display: grid; grid-template-columns: 1fr 1fr; min-height: 80vh; }
+  .restaurant-img { overflow: hidden; position: relative; }
+  .restaurant-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s; }
+  .restaurant-img:hover img { transform: scale(1.04); }
+  .restaurant-content { background: var(--cream); display: flex; flex-direction: column; justify-content: center; padding: 100px 80px; }
+  .restaurant-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(38px, 3.5vw, 56px); font-weight: 300; line-height: 1.15; color: var(--charcoal); margin-bottom: 24px; }
+  .restaurant-title em { font-style: italic; color: var(--sage); }
+  .restaurant-text { font-size: 13px; font-weight: 300; line-height: 1.9; color: var(--earth); margin-bottom: 40px; max-width: 400px; }
+  .menu-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
+  .menu-tag { font-size: 9px; font-weight: 400; letter-spacing: 0.25em; text-transform: uppercase; padding: 8px 18px; border: 1px solid var(--sage); color: var(--sage); transition: all 0.3s; }
+  .menu-tag:hover { background: var(--sage); color: var(--white); }
+
+  /* MEMBERSHIP */
+  .membership { padding: 110px 56px; background: var(--white); }
+  .membership-header { text-align: center; margin-bottom: 72px; }
+  .membership-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(42px, 5vw, 68px); font-weight: 300; color: var(--charcoal); line-height: 1.1; margin-bottom: 14px; }
+  .membership-sub { font-size: 12px; font-weight: 200; letter-spacing: 0.18em; color: var(--earth); }
+  .plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--cream-dark); }
+  .plan { padding: 56px 46px; border-right: 1px solid var(--cream-dark); position: relative; transition: background 0.4s; }
+  .plan:last-child { border-right: none; }
+  .plan.featured { background: var(--sage); }
+  .plan:not(.featured):hover { background: var(--cream); }
+  .plan-badge { font-size: 8px; font-weight: 400; letter-spacing: 0.4em; text-transform: uppercase; margin-bottom: 28px; color: var(--earth); }
+  .plan.featured .plan-badge { color: var(--sage-pale); }
+  .plan-name { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; color: var(--charcoal); margin-bottom: 20px; }
+  .plan.featured .plan-name { color: var(--white); }
+  .plan-price { display: flex; align-items: baseline; gap: 3px; margin-bottom: 36px; }
+  .price-cur { font-size: 18px; font-weight: 200; color: var(--earth); align-self: flex-start; margin-top: 8px; }
+  .plan.featured .price-cur { color: var(--sage-pale); }
+  .price-amt { font-family: 'Cormorant Garamond', serif; font-size: 54px; font-weight: 300; color: var(--charcoal); line-height: 1; }
+  .plan.featured .price-amt { color: var(--white); }
+  .price-per { font-size: 10px; font-weight: 200; letter-spacing: 0.12em; color: var(--earth); margin-left: 4px; }
+  .plan.featured .price-per { color: var(--sage-pale); }
+  .plan-feats { list-style: none; margin-bottom: 44px; }
+  .plan-feats li { font-size: 12px; font-weight: 300; line-height: 1.7; color: var(--earth); padding: 9px 0; border-bottom: 1px solid var(--cream-dark); display: flex; align-items: center; gap: 10px; }
+  .plan.featured .plan-feats li { color: rgba(255,255,255,0.85); border-color: rgba(255,255,255,0.15); }
+  .plan-feats li::before { content: ''; width: 4px; height: 4px; background: var(--sage); border-radius: 50%; flex-shrink: 0; }
+  .plan.featured .plan-feats li::before { background: var(--sage-pale); }
+  .plan-btn { display: block; text-align: center; font-size: 9px; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; text-decoration: none; padding: 15px; border: 1px solid var(--charcoal); color: var(--charcoal); transition: all 0.3s; }
+  .plan:not(.featured):hover .plan-btn { background: var(--charcoal); color: var(--white); }
+  .plan.featured .plan-btn { background: var(--white); color: var(--sage); border-color: var(--white); }
+  .plan.featured .plan-btn:hover { background: var(--charcoal); color: var(--white); border-color: var(--charcoal); }
+
+  /* BOOKING */
+  .booking { background: var(--charcoal); padding: 110px 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: center; }
+  .booking-content .section-label { color: var(--sage-light); }
+  .booking-content .section-label::before { background: var(--sage-light); }
+  .booking-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 4vw, 58px); font-weight: 300; color: var(--white); line-height: 1.15; margin-bottom: 20px; }
+  .booking-title em { font-style: italic; color: var(--sage-light); }
+  .booking-text { font-size: 13px; font-weight: 200; line-height: 1.9; color: rgba(255,255,255,0.45); margin-bottom: 44px; }
+  .hours-row { display: flex; gap: 40px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.08); }
+  .hour-block-day { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; color: var(--white); }
+  .hour-block-time { font-size: 10px; letter-spacing: 0.2em; color: rgba(255,255,255,0.35); margin-top: 4px; }
+  .booking-form { display: flex; flex-direction: column; gap: 18px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .form-group { display: flex; flex-direction: column; gap: 7px; }
+  .form-group label { font-size: 8px; font-weight: 400; letter-spacing: 0.38em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+  .form-group input, .form-group select { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); padding: 13px 16px; font-family: 'Jost', sans-serif; font-size: 12px; font-weight: 300; color: var(--white); outline: none; transition: border-color 0.3s; cursor: none; -webkit-appearance: none; }
+  .form-group input:focus, .form-group select:focus { border-color: var(--sage-light); }
+  .form-group select option { background: var(--charcoal); }
+  .form-submit { background: var(--sage); color: var(--white); border: none; padding: 17px; font-family: 'Jost', sans-serif; font-size: 10px; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; cursor: none; transition: background 0.3s, transform 0.2s; margin-top: 6px; }
+  .form-submit:hover { background: var(--sage-light); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer { background: #0F0F0E; padding: 72px 56px 36px; }
+  .footer-top { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 56px; padding-bottom: 56px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; letter-spacing: 0.1em; color: var(--white); margin-bottom: 18px; }
+  .footer-logo span { color: var(--sage-light); }
+  .footer-tagline { font-size: 11px; font-weight: 200; line-height: 1.85; color: rgba(255,255,255,0.3); margin-bottom: 28px; max-width: 220px; }
+  .social-links { display: flex; gap: 12px; }
+  .social-link { width: 34px; height: 34px; border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; font-size: 10px; color: rgba(255,255,255,0.45); text-decoration: none; transition: all 0.3s; }
+  .social-link:hover { border-color: var(--sage-light); color: var(--sage-light); }
+  .footer-col h4 { font-size: 8px; font-weight: 400; letter-spacing: 0.42em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 24px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a { font-size: 12px; font-weight: 200; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.3s; }
+  .footer-col ul li a:hover { color: var(--sage-light); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 36px; }
+  .footer-copy { font-size: 10px; font-weight: 200; letter-spacing: 0.1em; color: rgba(255,255,255,0.2); }
+  .footer-legal { display: flex; gap: 28px; }
+  .footer-legal a { font-size: 10px; font-weight: 200; color: rgba(255,255,255,0.2); text-decoration: none; transition: color 0.3s; }
+  .footer-legal a:hover { color: rgba(255,255,255,0.45); }
+
+  /* FLOAT BTN */
+  .float-btn { position: fixed; bottom: 36px; right: 36px; z-index: 50; background: var(--sage); color: var(--white); font-size: 9px; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; padding: 13px 26px; text-decoration: none; box-shadow: 0 8px 36px rgba(90,122,74,0.45); transition: all 0.3s; animation: fadeUp 1s 2s both; }
+  .float-btn:hover { background: var(--sage-light); transform: translateY(-3px); }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+  .reveal-delay-3 { transition-delay: 0.45s; }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Green'<span>Fit</span> & Spa<small style="display:block;font-size:8px;font-weight:200;letter-spacing:0.28em;color:rgba(255,255,255,0.55);margin-top:2px;text-transform:uppercase;">The Caribbean Fitness Experience</small></a>
+  <ul class="nav-links">
+    <li><a href="#services">Espaces</a></li>
+    <li><a href="#univers">Univers</a></li>
+    <li><a href="#therapeutes">Thérapeutes</a></li>
+    <li><a href="#restaurant">Restaurant</a></li>
+    <li><a href="#membership">Abonnements</a></li>
+  </ul>
+  <a href="#booking" class="nav-cta">Réserver</a>
+</nav>
+
+<!-- HERO — Hall d'entrée -->
+<section class="hero">
+  <img class="hero-img" src="Hall_entree_GFS.png" alt="Hall Green'Fit & Spa">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">The Caribbean Fitness Experience · Guadeloupe</p>
+    <h1 class="hero-title">Green'Fit<br><em>& Spa</em></h1>
+    <p class="hero-tagline">Body · Mind · Nature</p><p class="hero-tagline" style="font-size:11px;letter-spacing:0.38em;color:rgba(255,255,255,0.45);margin-top:10px;">The Caribbean Fitness Experience</p>
+    <div class="hero-actions">
+      <a href="#booking" class="btn-primary">Réserver une séance</a>
+      <a href="#services" class="btn-ghost">Découvrir</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Défiler</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span class="marquee-item">Plateau Fitness</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Spa & Rituels</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Pilates & Yoga</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Kids Club</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Restaurant Healthy</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Solarium & Padel</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Coworking</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Thérapeutes</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Plateau Fitness</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Spa & Rituels</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Pilates & Yoga</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Kids Club</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Restaurant Healthy</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Solarium & Padel</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Coworking</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Thérapeutes</span><span class="marquee-sep">·</span>
+  </div>
+</div>
+
+
+<!-- BÂTIMENT EXTERIOR -->
+<section style="display:grid;grid-template-columns:1fr 1fr;min-height:75vh;">
+  <div style="background:var(--charcoal);display:flex;flex-direction:column;justify-content:center;padding:90px 80px;">
+    <div class="section-label reveal">Notre Complexe</div>
+    <h2 class="reveal reveal-delay-1" style="font-family:'Cormorant Garamond',serif;font-size:clamp(38px,3.8vw,58px);font-weight:300;color:var(--white);line-height:1.12;margin-bottom:24px;">
+      Un écrin<br><em style="font-style:italic;color:var(--sage-light)">face à la mer</em>
+    </h2>
+    <p class="reveal reveal-delay-2" style="font-size:13px;font-weight:200;line-height:1.95;color:rgba(255,255,255,0.5);max-width:400px;margin-bottom:32px;">
+      Implanté au cœur de la Guadeloupe avec une vue imprenable sur les îles, le complexe Green'Fit & Spa allie architecture biophilique, rooftop panoramique et espaces intérieurs d'exception sur 3 niveaux.
+    </p>
+    <div class="reveal reveal-delay-3" style="display:flex;gap:36px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.08);">
+      <div><div class="stat-num" style="color:var(--white);">3</div><div class="stat-label" style="color:rgba(255,255,255,0.4);">Niveaux</div></div>
+      <div><div class="stat-num" style="color:var(--white);">4500<span style="font-size:24px;">m²</span></div><div class="stat-label" style="color:rgba(255,255,255,0.4);">De surface</div></div>
+      <div><div class="stat-num" style="color:var(--white);">10</div><div class="stat-label" style="color:rgba(255,255,255,0.4);">Univers</div></div>
+    </div>
+  </div>
+  <div style="overflow:hidden;position:relative;">
+    <img src="Immeuble_GFS.png" alt="Complexe Green'Fit & Spa" style="width:100%;height:100%;object-fit:cover;transition:transform 0.8s ease;">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(26,26,24,0.3) 0%, transparent 40%);"></div>
+  </div>
+</section>
+
+<!-- HALL INTRO -->
+<section class="hall">
+  <div class="hall-image">
+    <img src="Plateau_Fitness.png" alt="Plateau Fitness">
+  </div>
+  <div class="hall-content">
+    <div class="section-label reveal">Notre Sanctuaire</div>
+    <h2 class="hall-title reveal reveal-delay-1">Un lieu pensé pour<br><em>votre transformation</em></h2>
+    <p class="hall-text reveal reveal-delay-2">
+      Green'Fit & Spa est le premier complexe de bien-être premium des Antilles. Un espace unique où l'architecture biophilique, la technologie de pointe et les soins naturels se conjuguent pour vous offrir une expérience de transformation globale — corps, esprit et énergie.
+    </p>
+    <a href="#services" class="btn-primary reveal reveal-delay-3" style="color:var(--white);display:inline-block;width:fit-content;text-decoration:none;">Explorer les espaces</a>
+    <div class="hall-stats reveal">
+      <div><div class="stat-num">10</div><div class="stat-label">Univers distincts</div></div>
+      <div><div class="stat-num">3K+</div><div class="stat-label">Membres actifs</div></div>
+      <div><div class="stat-num">98%</div><div class="stat-label">Satisfaction</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="services-header">
+    <h2 class="services-title reveal">Nos <em>Espaces</em></h2>
+    <p class="services-desc reveal reveal-delay-1">Chaque espace a été conçu pour vous immerger dans un univers unique dédié à votre bien-être.</p>
+  </div>
+  <div class="services-grid">
+    <div class="svc-card">
+      <img src="Plateau_Fitness.png" alt="Plateau Fitness">
+      <div class="svc-overlay"></div>
+      <div class="svc-info">
+        <div class="svc-num">01</div>
+        <div class="svc-name">Plateau<br>Fitness</div>
+        <div class="svc-desc">Équipements premium, piste de sprint, kettlebells et mur végétal pour des entraînements d'exception.</div>
+        <div class="svc-arrow">Découvrir →</div>
+      </div>
+    </div>
+    <div class="svc-card">
+      <img src="Spa_2.png" alt="Spa & Rituels">
+      <div class="svc-overlay"></div>
+      <div class="svc-info">
+        <div class="svc-num">02</div>
+        <div class="svc-name">Spa &<br>Rituels</div>
+        <div class="svc-desc">Piscine, jacuzzi, bain froid, sauna, hammam et cabines de soins dans une atmosphère enchanteresse.</div>
+        <div class="svc-arrow">Découvrir →</div>
+      </div>
+    </div>
+    <div class="svc-card">
+      <img src="Studio_Pilates_Yoga.png" alt="Studio Pilates & Yoga">
+      <div class="svc-overlay"></div>
+      <div class="svc-info">
+        <div class="svc-num">03</div>
+        <div class="svc-name">Pilates &<br>Yoga Studio</div>
+        <div class="svc-desc">Studio vue mer avec reformers Pilates, tapis yoga et instructeurs certifiés pour tous niveaux.</div>
+        <div class="svc-arrow">Découvrir →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THÉRAPEUTES -->
+<section class="therapeutes" id="therapeutes">
+  <div class="therapeutes-img">
+    <img src="Therapeutes_GFS.png" alt="Les Thérapeutes Green'Fit">
+  </div>
+  <div class="therapeutes-content">
+    <div class="section-label reveal">Expertise & Soins</div>
+    <h2 class="therapeutes-title reveal reveal-delay-1">Les Thérapeutes<br><em>Green'Fit</em></h2>
+    <p class="therapeutes-text reveal reveal-delay-2">
+      Une équipe pluridisciplinaire de professionnels de santé réunis sous un même toit pour prendre soin de vous dans votre globalité — corps, esprit et énergie.
+    </p>
+    <div class="team-grid reveal reveal-delay-3">
+      <div class="team-item">
+        <div class="team-icon">🦴</div>
+        <div><div class="team-name">Kiné</div><div class="team-role">Récupération, rééducation & performance</div></div>
+      </div>
+      <div class="team-item">
+        <div class="team-icon">🌿</div>
+        <div><div class="team-name">Ostéopathe</div><div class="team-role">Équilibre, mobilité & prévention</div></div>
+      </div>
+      <div class="team-item">
+        <div class="team-icon">🌱</div>
+        <div><div class="team-name">Naturopathe</div><div class="team-role">Nutrition, hygiène de vie & vitalité</div></div>
+      </div>
+      <div class="team-item">
+        <div class="team-icon">🙌</div>
+        <div><div class="team-name">Masseur</div><div class="team-role">Détente, relâchement & bien-être</div></div>
+      </div>
+      <div class="team-item">
+        <div class="team-icon">✨</div>
+        <div><div class="team-name">Énergéticienne</div><div class="team-role">Harmonie énergétique & sérénité</div></div>
+      </div>
+      <div class="team-item">
+        <div class="team-icon">🥗</div>
+        <div><div class="team-name">Diététicien</div><div class="team-role">Alimentation équilibrée & objectifs santé</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UNIVERS BENTO -->
+<section class="univers" id="univers">
+  <div class="univers-header">
+    <div class="section-label reveal" style="justify-content:center">Nos Univers</div>
+    <h2 class="univers-title reveal reveal-delay-1">Un complexe<br>complet & unique</h2>
+    <p class="univers-sub reveal reveal-delay-2">Chaque espace est une invitation à vivre différemment</p>
+  </div>
+  <div class="univers-bento reveal">
+    <div class="bento-item tall">
+      <img src="Green_Fit_Kids.png" alt="Kids Club">
+      <div class="bento-overlay"></div>
+      <div class="bento-caption">
+        <div class="bento-tag">Pour les enfants</div>
+        <div class="bento-name">Kids Club<br>Green'Fit</div>
+        <div class="bento-desc">Bouger, jouer, grandir — un espace dédié aux enfants pendant que vous prenez soin de vous.</div>
+      </div>
+    </div>
+    <div class="bento-item">
+      <img src="Espace_coworking.png" alt="Espace Coworking">
+      <div class="bento-overlay"></div>
+      <div class="bento-caption">
+        <div class="bento-tag">Focus & Productivité</div>
+        <div class="bento-name">Coworking Space</div>
+        <div class="bento-desc">Focus. Create. Connect. Grow.</div>
+      </div>
+    </div>
+    <div class="bento-item">
+      <img src="Vestiaires_premium.png" alt="Vestiaires Premium">
+      <div class="bento-overlay"></div>
+      <div class="bento-caption">
+        <div class="bento-tag">Confort & Intimité</div>
+        <div class="bento-name">Vestiaires Premium</div>
+        <div class="bento-desc">Casiers connectés, douches, produits premium et serviettes inclus.</div>
+      </div>
+    </div>
+    <div class="bento-item" style="grid-column: 2 / 4;">
+      <img src="Solarium_Padel_2.png" alt="Rooftop Solarium & Padel" style="object-position:center 30%;">
+      <div class="bento-overlay"></div>
+      <div class="bento-caption">
+        <div class="bento-tag">Rooftop · Solarium · Padel</div>
+        <div class="bento-name">Le Rooftop</div>
+        <div class="bento-desc">Piscine vue mer, courts de padel, solarium et espace événementiel face aux îles.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROOFTOP HERO -->
+<section class="rooftop">
+  <img src="Solarium_Padel_2.png" alt="Rooftop Solarium Padel">
+  <div class="rooftop-overlay"></div>
+  <div class="rooftop-content reveal">
+    <p class="rooftop-tag">Rooftop · Vue Mer · Guadeloupe</p>
+    <h2 class="rooftop-title">Solarium<br><em>& Padel</em></h2>
+    <p class="rooftop-sub">Piscine infinity · Courts de padel · Événements privés au coucher du soleil</p>
+  </div>
+</section>
+
+<!-- RESTAURANT -->
+<section class="restaurant" id="restaurant">
+  <div class="restaurant-img">
+    <img src="Restaurant_healthy.png" alt="Restaurant Healthy Green'Fit">
+  </div>
+  <div class="restaurant-content">
+    <div class="section-label reveal">Nutrition & Plaisir</div>
+    <h2 class="restaurant-title reveal reveal-delay-1">Restaurant<br><em>Healthy & Bar</em></h2>
+    <p class="restaurant-text reveal reveal-delay-2">
+      Un restaurant où chaque plat est une célébration du goût et de la santé. Bowls colorés, smoothies tropicaux, shots de vitalité — le tout dans un cadre lumineux ouvert sur la végétation caribéenne.
+    </p>
+    <div class="menu-tags reveal reveal-delay-3">
+      <span class="menu-tag">Smoothies</span>
+      <span class="menu-tag">Green Bowls</span>
+      <span class="menu-tag">Protein Plates</span>
+      <span class="menu-tag">Shots Vitalité</span>
+      <span class="menu-tag">Snacks Bio</span>
+      <span class="menu-tag">Jus Frais</span>
+    </div>
+    <a href="#booking" class="btn-primary reveal" style="color:var(--white);display:inline-block;width:fit-content;text-decoration:none;">Voir le menu</a>
+  </div>
+</section>
+
+<!-- MEMBERSHIP -->
+<section class="membership" id="membership">
+  <div class="membership-header">
+    <div class="section-label reveal" style="justify-content:center">Abonnements</div>
+    <h2 class="membership-title reveal reveal-delay-1">Votre expérience,<br>votre formule</h2>
+    <p class="membership-sub reveal reveal-delay-2">Accès à tous nos espaces · Sans engagement · Résiliable à tout moment</p>
+  </div>
+  <div class="plans-grid reveal">
+    <div class="plan">
+      <div class="plan-badge">Essentiel</div>
+      <div class="plan-name">Vert</div>
+      <div class="plan-price">
+        <span class="price-cur">€</span>
+        <span class="price-amt">79</span>
+        <span class="price-per">/ mois</span>
+      </div>
+      <ul class="plan-feats">
+        <li>Plateau fitness illimité</li>
+        <li>Vestiaires premium inclus</li>
+        <li>1 cours collectif / semaine</li>
+        <li>1 accès / semaine au spa</li>
+        <li>1 accès / semaine au solarium</li>
+        <li>Application Green'Fit</li>
+      </ul>
+      <a href="#booking" class="plan-btn">Commencer</a>
+    </div>
+    <div class="plan featured">
+      <div class="plan-badge">★ Le plus populaire</div>
+      <div class="plan-name">Sauge</div>
+      <div class="plan-price">
+        <span class="price-cur">€</span>
+        <span class="price-amt">149</span>
+        <span class="price-per">/ mois</span>
+      </div>
+      <ul class="plan-feats">
+        <li>Tout l'abonnement Vert</li>
+        <li>Spa & hammam illimités</li>
+        <li>2 accès / semaine au solarium</li>
+        <li>Cours collectifs illimités</li>
+        <li>2 soins thérapeutes / mois</li>
+        <li>Accès coworking</li>
+        <li>Coaching mensuel</li>
+      </ul>
+      <a href="#booking" class="plan-btn">Commencer</a>
+    </div>
+    <div class="plan">
+      <div class="plan-badge">Prestige</div>
+      <div class="plan-name">Or</div>
+      <div class="plan-price">
+        <span class="price-cur">€</span>
+        <span class="price-amt">249</span>
+        <span class="price-per">/ mois</span>
+      </div>
+      <ul class="plan-feats">
+        <li>Tout l'abonnement Sauge</li>
+        <li>Coach personnel dédié</li>
+        <li>Soins thérapeutes illimités</li>
+        <li>Kids Club inclus</li>
+        <li>Rooftop & padel accès VIP</li>
+        <li>Conciergerie 7j/7</li>
+      </ul>
+      <a href="#booking" class="plan-btn">Commencer</a>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="booking">
+  <div class="booking-content">
+    <div class="section-label reveal">Réservation</div>
+    <h2 class="booking-title reveal reveal-delay-1">Commencez votre<br><em>transformation</em></h2>
+    <p class="booking-text reveal reveal-delay-2">Réservez votre première séance découverte. Nos conseillers vous accompagnent pour créer le parcours bien-être idéal selon vos objectifs.</p>
+    <div class="hours-row reveal reveal-delay-3">
+      <div><div class="hour-block-day">Lun — Sam</div><div class="hour-block-time">6h00 – 22h00</div></div>
+      <div><div class="hour-block-day">Dimanche</div><div class="hour-block-time">8h00 – 20h00</div></div>
+    </div>
+  </div>
+  <div class="booking-form reveal reveal-delay-1">
+    <div class="form-row">
+      <div class="form-group"><label>Prénom</label><input type="text" placeholder="Marie"></div>
+      <div class="form-group"><label>Nom</label><input type="text" placeholder="Dupont"></div>
+    </div>
+    <div class="form-group"><label>E-mail</label><input type="email" placeholder="marie@email.com"></div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Espace souhaité</label>
+        <select>
+          <option>Plateau Fitness</option>
+          <option>Spa & Rituels</option>
+          <option>Studio Pilates & Yoga</option>
+          <option>Consultation Thérapeute</option>
+          <option>Restaurant & Bar</option>
+          <option>Rooftop & Padel</option>
+          <option>Kids Club</option>
+          <option>Coworking</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Date souhaitée</label><input type="date"></div>
+    </div>
+    <div class="form-group"><label>Message</label><input type="text" placeholder="Précisions ou questions..."></div>
+    <button class="form-submit">Confirmer la réservation</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">Green'<span>Fit</span> & Spa</div><div style="font-size:9px;font-weight:200;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:6px;margin-bottom:14px;">The Caribbean Fitness Experience</div>
+      <p class="footer-tagline">The Caribbean Fitness Experience. Votre sanctuaire de bien-être premium aux Antilles.</p>
+      <div class="social-links">
+        <a href="#" class="social-link">in</a>
+        <a href="#" class="social-link">ig</a>
+        <a href="#" class="social-link">fb</a>
+        <a href="#" class="social-link">yt</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Espaces</h4>
+      <ul>
+        <li><a href="#">Plateau Fitness</a></li>
+        <li><a href="#">Spa & Rituels</a></li>
+        <li><a href="#">Pilates & Yoga</a></li>
+        <li><a href="#">Rooftop & Padel</a></li>
+        <li><a href="#">Kids Club</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">Thérapeutes</a></li>
+        <li><a href="#">Coaching</a></li>
+        <li><a href="#">Restaurant Healthy</a></li>
+        <li><a href="#">Coworking</a></li>
+        <li><a href="#">Événementiel</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="#">Guadeloupe, Antilles</a></li>
+        <li><a href="#">+590 590 00 00 00</a></li>
+        <li><a href="#">contact@greenfit-spa.fr</a></li>
+        <li><a href="#">Nous trouver</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Green'Fit & Spa · Tous droits réservés</div>
+    <div class="footer-legal">
+      <a href="#">Mentions légales</a>
+      <a href="#">Confidentialité</a>
+      <a href="#">CGU</a>
+    </div>
+  </div>
+</footer>
+
+<a href="#booking" class="float-btn">Réserver</a>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top = mouseY + 'px';
+  });
+  (function animateCursor() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top = ringY + 'px';
+    requestAnimationFrame(animateCursor);
+  })();
+  document.querySelectorAll('a, button, .svc-card, .plan, .bento-item, .hall-image').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(2.5)';
+      cursorRing.style.transform = 'translate(-50%,-50%) scale(1.5)';
+      cursorRing.style.opacity = '0.3';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+      cursorRing.style.transform = 'translate(-50%,-50%) scale(1)';
+      cursorRing.style.opacity = '0.6';
+    });
+  });
+
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 80);
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
